@@ -1,0 +1,36 @@
+
+.card{
+    filter: drop-shadow(0px 0px 14px #000);
+    display:center;
+    background: linear-gradient(rgba(230, 230, 230, 0.884) 75%, #474a51 20%) no-repeat;
+    width:300px;
+    height: 400px;
+    box-shadow: 4px 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius:20px;
+    transition:0.3s;
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+}
+
+.card:hover {
+    top: -5px;
+    transition:0.3s;
+    box-shadow: 8px 8px 16px 0 rgba(0,0,0,0.2),-8px -8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.name {
+    color: #000;
+}
+
+
+.types {
+    color: #000;
+}
+
+.divider{
+    height: 70px;
+}
+.divider2{
+    height: 13px;
+}

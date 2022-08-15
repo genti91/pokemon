@@ -1,0 +1,105 @@
+.home {
+    background-color: #27292d;
+    min-height: 100vh;
+}
+
+.pokemonImg {
+  margin-top: 5px;
+  width: 140px;
+  height: auto;
+}
+
+.topBar {
+  filter: drop-shadow(0px 25px 11px #000);
+  background-color: #171544;
+  height: 61px;
+}
+
+.filtros {
+  margin-top: 10px;
+}
+
+.filtro {
+  position: relative;
+  z-index: 99 !important;
+  background-color: #303245;
+  border-radius: 5px;
+  border: 0;
+  box-sizing: border-box;
+  color: #65657b;
+  font-size: 15px;
+  height: 100%;
+  outline: 0;
+  padding: 4px 20px 5px;
+  margin-top: 15px;
+}
+
+.divider{
+  width:15px;
+  height:auto;
+  display:inline-block;
+}
+
+.loadingImg {
+  margin-top: 100px;
+}
+
+.cards {
+    margin: 0 auto;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+    grid-auto-rows: auto;
+    gap: 50px;
+    font-family: sans-serif;
+    padding-top: 30px;
+}
+
+.cards * {
+    box-sizing: border-box;
+}
+
+.crearPokemon {
+    position: absolute;
+    top: 3%;
+    right: 5%;
+}
+
+.crearPokemon {
+  margin-top: 8px;
+  text-decoration: none;
+  background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+  border-radius: 20px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: "Inter UI","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  height: 40px;
+  width: 203px;
+  padding: 0 1.6rem;
+  text-align: center;
+  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+  transition: all .5s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.crearPokemon:hover {
+  box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+  transition-duration: .1s;
+}
+
+@media (min-width: 768px) {
+  .crearPokemon {
+    padding: 0 2.6rem;
+  }
+}
+
+.cardLink{
+  text-decoration: none;
+}
