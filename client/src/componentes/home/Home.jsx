@@ -13,6 +13,7 @@ export default function Home (){
     const pokemons = useSelector((state)=>state.pokemons);
     const types = useSelector((state) => state.types);
     const allPokemons = useSelector((state) => state.allPokemons);
+    const loading = useSelector((state) => state.loading);
     const [currentPage, setCurrentPage] = useState(1);
     const [pokemonsPerPage/*, setPokemonsPerPage*/] = useState(12);
     const [orden, setOrden] = useState('');
@@ -93,7 +94,7 @@ export default function Home (){
                     <option value='api' key='api'>Api</option>
                 </select>
             </div>
-            {allPokemons.length === 0 ? <img className={styles.loadingImg} src="http://superstorefinder.net/support/wp-content/uploads/2018/01/orange_circles.gif" width='200px' alt=""/>:
+            {allPokemons.length === 0 || loading ? <img className={styles.loadingImg} src="http://superstorefinder.net/support/wp-content/uploads/2018/01/orange_circles.gif" width='200px' alt=""/>:
             currentPokemons.length !== 0 ?
                 <div className={styles.cards}>
                     {
@@ -106,13 +107,13 @@ export default function Home (){
                         })
                     }
                 </div> : 
-                <h1>no more pokemons</h1>
+                <div className={styles.warning}>There are no pokemons with those characteristics</div>
                 }
-                <Paginado
+                {!loading ? <Paginado
                 pokemonsPerPage={pokemonsPerPage}
                 allPokemons={pokemons.length}
                 paginado={paginado}
-                />
+                />:''}
         </div>
     )
 

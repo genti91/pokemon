@@ -3,7 +3,8 @@ const initialState = {
     pokemons: [],
     allPokemons: [],
     types: [],
-    details: {}
+    details: {},
+    loading: false
 }
 
 function sortAsc(a,b) {
@@ -73,6 +74,11 @@ function rootReducer (state = initialState, action) {
             return{
                 ...state,
                 pokemons: sortedPokemons2
+            }
+        case 'SET_LOADING':
+            return{
+                ...state,
+                loading: !state.loading
             }
         default:
             return state;

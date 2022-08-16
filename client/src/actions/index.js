@@ -10,6 +10,12 @@ export function getPokemons(){
     }
 }
 
+export function setLoading(){
+    return {
+        type: 'SET_LOADING'
+    }
+}
+
 export function filterPokemonByType(payload){
     return {
         type: 'FILTER_BY_TYPE',
