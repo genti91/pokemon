@@ -46,18 +46,22 @@ export default function Home (){
     }
 
     function handleSortByName(e) {
-        e.preventDefault();
-        dispatch(sortByName(e.target.value));
-        setCurrentPage(1);
-        console.log(orden)
-        setOrden(e.target.value);
+        if(e.target.value !== 'null'){
+            e.preventDefault();
+            dispatch(sortByName(e.target.value));
+            setCurrentPage(1);
+            console.log(orden)
+            setOrden(e.target.value);
+        }
     }
 
     function handleSortByAttack(e) {
-        e.preventDefault();
-        dispatch(sortByAttack(e.target.value));
-        setCurrentPage(1);
-        setOrden(e.target.value);
+        if(e.target.value !== 'null'){
+            e.preventDefault();
+            dispatch(sortByAttack(e.target.value));
+            setCurrentPage(1);
+            setOrden(e.target.value);
+        }
     }
 
     return (
@@ -69,13 +73,13 @@ export default function Home (){
             </div>
             <div className={styles.filtros}>
                 <select className={styles.filtro} onClick={e => {handleSortByName(e)}}>
-                    <option key='alp'>Alphabetic</option>
+                    <option value='null' key='alp'>Alphabetic</option>
                     <option value='asc' key='asc'>Ascending (A-Z)</option>
                     <option value='desc' key='desc'>Descending (Z-A)</option>
                 </select>
                 <div className={styles.divider}/>
                 <select className={styles.filtro} onClick={e => {handleSortByAttack(e)}}>
-                    <option key='atta'>Attack</option>
+                    <option value='null' key='atta'>Attack</option>
                     <option value='less' key='less'>Less -</option>
                     <option value='more' key='more'>More +</option>
                 </select>
