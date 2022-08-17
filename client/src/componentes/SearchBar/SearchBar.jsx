@@ -4,10 +4,9 @@ import { useDispatch } from "react-redux";
 import { getNamePokemons, setLoading } from "../../actions";
 import styles from './searchBar.module.css'
 
-export default function SearchBar ({currentPokemons}){
+export default function SearchBar (){
     const dispatch = useDispatch();
     const [name, setName] = useState('');
-    currentPokemons.hola = 'loading';
     function handleInputChange(e){
         e.preventDefault();
         setName(e.target.value);

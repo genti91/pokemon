@@ -25,7 +25,6 @@ function validate(input) {
     } else if (input.type[0] === 'null' && input.type[1] === 'null') {
         errors.type = "At least one type is required."
     }
-    console.log(errors);
     return errors;
 }
 
@@ -69,21 +68,27 @@ export default function PokemonCreate(){
             ...input,
             [e.target.name]: e.target.value
         }));
-        console.log(errors);
-        console.log(input)
     }
 
     function hadleSelect1(e){
         setInput({
             ...input,
             type: [e.target.value, input.type[1]]
-        })
+        });
+        setErrors(validate({
+            ...input,
+            type: [e.target.value, input.type[1]]
+        }));
     }
     function hadleSelect2(e){
         setInput({
             ...input,
             type: [input.type[0], e.target.value]
-        })
+        });
+        setErrors(validate({
+            ...input,
+            type: [input.type[0], e.target.value]
+        }));
     }
 
     function handleSubmit(e){
@@ -92,11 +97,8 @@ export default function PokemonCreate(){
             ...input,
             type: input.type.filter((e) => e !== 'null')
         })
-        console.log(errors);
-        console.log(input);
         if(Object.keys(errors).length === 0 && input.name !== ''){
             dispatch(postPokemon(input));
-            console.log(input);
             alert("Pokemon Created!");
             setInput({
                 name:'',

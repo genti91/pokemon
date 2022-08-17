@@ -9,16 +9,14 @@ export default function  Paginado ({pokemonsPerPage, allPokemons, paginado}){
     }
 
     return(
-        <div className={styles.wrapper}>
-            <div className={styles.pageHeader}>
-                <ul className={styles.pagination}>
-                    { pageNumbers && pageNumbers.map(number => (
-                        <li key={number}>
-                                <button onClick={() => paginado(number)}>{number}</button>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+        <div className={styles.contenedor}>
+            <ul className={styles.paginado}>
+                { pageNumbers && pageNumbers.map(number => (
+                    <li key={number}>
+                            <button onClick={() => paginado(number)}>{number}</button>
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }

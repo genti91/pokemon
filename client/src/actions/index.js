@@ -2,11 +2,15 @@ import axios from 'axios';
 
 export function getPokemons(){
     return async function (dispatch){
-        var json = await axios.get('http://192.168.0.98:3001/pokemons');
-        return dispatch({
-            type: 'GET_POKEMONS',
-            payload: json.data
-        });
+        try{
+            var json = await axios.get('http://192.168.0.98:3001/pokemons');
+            return dispatch({
+                type: 'GET_POKEMONS',
+                payload: json.data
+            });
+        }catch(err){
+            console.log(err);
+        }
     }
 }
 
@@ -60,11 +64,15 @@ export function getNamePokemons(name){
 
 export function getTypes(){
     return async function (dispatch){
-        var json = await axios.get('http://192.168.0.98:3001/types');
-        return dispatch({
-            type: 'GET_TYPES',
-            payload: json.data
-        });
+        try{
+            var json = await axios.get('http://192.168.0.98:3001/types');
+            return dispatch({
+                type: 'GET_TYPES',
+                payload: json.data
+            });
+        }catch(err){
+            console.log(err);
+        }
     }
 }
 
