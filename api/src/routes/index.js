@@ -15,6 +15,7 @@ const getPokemonApi = async () => {
     const pokemonUrlNext = await axios.get(pokemonUrl.data.next);
     const allUrl = [...pokemonUrl.data.results, ...pokemonUrlNext.data.results];
     const allPokemon = allUrl.map(el => axios.get(el.url));
+    // proceso todas las promesas y devuelvo el resultado final
     var pokemons = Promise.all(allPokemon).then(res => {
         var arreglo = [];
         res.forEach(({data}) => {
@@ -39,6 +40,7 @@ const getPokemonApi = async () => {
 };
 
 const getPokemonDb = async () => {
+    //buscamos todos los pakemones de la bd incluyendo el modelo type
     return await Pokemon.findAll({
         include:[{
             model: Type,
@@ -95,6 +97,7 @@ router.post('/pokemons', async (req, res) => {
         type
     });
     var typeDb = await Type.findAll({ where: { name:type } });
+    //linkea type a pokemon
     crearPokemon.addType(typeDb);
     res.send('Pokemon creado exitosamente');
 });
