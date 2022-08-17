@@ -11,32 +11,36 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 const getPokemonApi = async () => {
-    const pokemonUrl = await axios.get('https://pokeapi.co/api/v2/pokemon');
-    const pokemonUrlNext = await axios.get(pokemonUrl.data.next);
-    const allUrl = [...pokemonUrl.data.results, ...pokemonUrlNext.data.results];
-    const allPokemon = allUrl.map(el => axios.get(el.url));
-    // proceso todas las promesas y devuelvo el resultado final
-    var pokemons = Promise.all(allPokemon).then(res => {
-        var arreglo = [];
-        res.forEach(({data}) => {
-            arreglo.push(
-                {
-                    name: data.name,
-                    health: data.stats[0].base_stat,
-                    attack: data.stats[1].base_stat,
-                    defense: data.stats[2].base_stat,
-                    speed: data.stats[5].base_stat,
-                    height: data.height,
-                    weight: data.weight,
-                    img: data.sprites.other.home.front_default,
-                    id: data.id,
-                    types: data.types.map(el => el.type.name),
-                }
-            );
+    try{
+        const pokemonUrl = await axios.get('https://pokeapi.co/api/v2/pokemon');
+        const pokemonUrlNext = await axios.get(pokemonUrl.data.next);
+        const allUrl = [...pokemonUrl.data.results, ...pokemonUrlNext.data.results];
+        const allPokemon = allUrl.map(el => axios.get(el.url));
+        // proceso todas las promesas y devuelvo el resultado final
+        var pokemons = Promise.all(allPokemon).then(res => {
+            var arreglo = [];
+            res.forEach(({data}) => {
+                arreglo.push(
+                    {
+                        name: data.name,
+                        health: data.stats[0].base_stat,
+                        attack: data.stats[1].base_stat,
+                        defense: data.stats[2].base_stat,
+                        speed: data.stats[5].base_stat,
+                        height: data.height,
+                        weight: data.weight,
+                        img: data.sprites.other.home.front_default,
+                        id: data.id,
+                        types: data.types.map(el => el.type.name),
+                    }
+                );
+            });
+            return arreglo;
         });
-        return arreglo;
-    });
-    return pokemons;
+        return pokemons;
+    } catch(err){
+        return err;
+    }
 };
 
 const getPokemonDb = async () => {
@@ -59,27 +63,35 @@ const getAllPokemons = async () => {
 }
 
 router.get('/pokemons', async (req, res) => {
-    var name = req.query.name
-    var allPokemons = await getAllPokemons();
-    if (name) {
-        name = name.toLowerCase();
-        var pokemon = allPokemons.filter(e => e.name === name);
-        res.status(200).send(pokemon);
-    } else {
-        res.status(200).send(allPokemons);
+    try{
+        var name = req.query.name
+        var allPokemons = await getAllPokemons();
+        if (name) {
+            name = name.toLowerCase();
+            var pokemon = allPokemons.filter(e => e.name === name);
+            res.status(200).send(pokemon);
+        } else {
+            res.status(200).send(allPokemons);
+        }
+    }catch(err){
+        res.status(503).send(err);
     }
 });
 
 router.get('/types', async (req, res) => {
-    const typesApi = await axios.get('https://pokeapi.co/api/v2/type');
-    const types = typesApi.data.results.map(e => e.name);
-    types.forEach(e => {
-        Type.findOrCreate({
-            where: {name: e}
+    try{
+        const typesApi = await axios.get('https://pokeapi.co/api/v2/type');
+        const types = typesApi.data.results.map(e => e.name);
+        types.forEach(e => {
+            Type.findOrCreate({
+                where: {name: e}
+            });
         });
-    });
-    const allTypes = await Type.findAll();
-    res.send(allTypes);
+        const allTypes = await Type.findAll();
+        res.send(allTypes);
+    }catch(err){
+        res.status(503).send(err);
+    }
 });
 
 router.post('/pokemons', async (req, res) => {

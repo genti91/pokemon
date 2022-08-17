@@ -64,7 +64,7 @@ export default function Home (){
         <div className={styles.home}>
             <div className={styles.topBar}>
                 <input className={styles.pokemonImg} type="Image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png" onClick={e => {handleClick(e)}}/>
-                <div className={styles.searchBar}><SearchBar/></div>
+                <div className={styles.searchBar}><SearchBar setCurrentPage={setCurrentPage}/></div>
                 <Link to = '/addpokemon'><button className={styles.crearPokemon}>Create Pokemon</button></Link>
             </div>
             <div className={styles.filtros}>
